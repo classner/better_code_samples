@@ -27,7 +27,7 @@ Better Code Samples
 This plugin:
 
 - Adds a div wrapper around all tables with class name 'codehilitetable'
-- The surrounding div is of class 'hilitewrapper' and can be used to 
+- The surrounding div is of class 'hilitewrapper' and can be used to
   add an appropriate style to the code samples, e.g. for making them
   scrollable.
 """
@@ -50,6 +50,9 @@ def content_object_init(instance):
                 wrapper_tag['class'] = 'hilitewrapper'
                 ctbl.wrap(wrapper_tag)
         instance._content = soup.decode()
+        # If beautiful soup appended html tags.
+        if instance._content.startswith('<html>'):
+          instance._content = instance._content[12:-14]
 
 def register():
     signals.content_object_init.connect(content_object_init)
