@@ -42,7 +42,7 @@ logger = logging.getLogger(__name__)
 def content_object_init(instance):
     if instance._content is not None:
         content = instance._content
-        soup = BeautifulSoup(content)
+        soup = BeautifulSoup(content, "html5lib")
 
         if 'table' in content:
             for ctbl in soup.find_all('table', class_="codehilitetable"):
